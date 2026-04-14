@@ -1,6 +1,7 @@
 -- CONSULTAS OBLIGATORIAS
+-- Este archivo contiene las consultas que consumen los objetos creados en el script completo.
 
--- 1) Historial academico de un alumno (JOIN alumnos, materias, calificaciones)
+-- CONSULTA 1: Historial academico de un alumno (JOIN alumnos, materias, calificaciones)
 SELECT
 a.id_alumno,
 a.nombre,
@@ -13,7 +14,7 @@ JOIN materias m ON gmd.id_materia = m.id_materia
 JOIN calificaciones c ON i.id_inscripcion = c.id_inscripcion
 WHERE a.id_alumno = 1;
 
--- 2) Promedio por alumno (AVG + GROUP BY)
+-- CONSULTA 2: Promedio por alumno (AVG + GROUP BY)
 SELECT
 a.id_alumno,
 a.nombre,
@@ -23,18 +24,21 @@ JOIN inscripciones i ON a.id_alumno = i.id_alumno
 JOIN calificaciones c ON i.id_inscripcion = c.id_inscripcion
 GROUP BY a.id_alumno, a.nombre;
 
--- 3) Alumnos con promedio mayor al promedio general (subconsulta en WHERE)
+-- SUBCONSULTA 1: Alumnos con promedio mayor al promedio general
+-- Requiere la vista vista_promedios definida en el script completo.
 SELECT *
 FROM vista_promedios
 WHERE promedio > (SELECT AVG(promedio) FROM vista_promedios);
 
--- 4) Alumnos reprobados (promedio < 70)
+-- VISTA 1: Alumnos reprobados usando la vista vista_promedios
 SELECT *
 FROM vista_promedios
 WHERE promedio < 70;
 
--- PROCEDIMIENTOS
+-- PROCEDIMIENTO 1: Consulta de desempeno por alumno
 CALL sp_consultar_desempeno(1);
+
+-- PROCEDIMIENTO 2: Registro de calificacion
 CALL sp_registrar_calificacion(1, 95.50);
 
 -- TRANSACCION: proceso de inscripcion

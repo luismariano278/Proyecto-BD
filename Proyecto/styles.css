@@ -33,6 +33,45 @@ body {
   margin: 40px auto;
 }
 
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.topbar h1,
+.topbar h2 {
+  margin: 0;
+}
+
+.topbar-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  padding: 10px 14px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 700;
+  border: 1px solid #ffd7d3;
+  color: #a4271e;
+  background: #fff4f2;
+  transition: transform 0.12s ease, filter 0.2s ease;
+}
+
+.btn-ghost:hover {
+  filter: brightness(0.99);
+  transform: translateY(-1px);
+}
+
 .card {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -69,20 +108,24 @@ label {
 }
 
 input,
+select,
 button {
   width: 100%;
   border-radius: 12px;
   font-size: 1rem;
 }
 
-input {
+input,
+select {
   border: 1px solid var(--border);
   padding: 12px 14px;
   outline: none;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  background: #ffffff;
 }
 
-input:focus {
+input:focus,
+select:focus {
   border-color: #76a9ff;
   box-shadow: 0 0 0 4px rgba(15, 111, 255, 0.16);
 }
@@ -110,6 +153,176 @@ button:active {
 .table-wrap {
   overflow-x: auto;
   margin-top: 14px;
+}
+
+.table-compact th,
+.table-compact td {
+  padding: 10px 12px;
+}
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 14px;
+}
+
+.section-head .subtitle {
+  margin-bottom: 0;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+  margin: 18px 0;
+}
+
+.summary-card {
+  background: linear-gradient(180deg, #f7faff 0%, #ffffff 100%);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px;
+}
+
+.summary-label {
+  display: block;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.summary-value {
+  display: block;
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.summary-card p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.form-shell {
+  position: relative;
+  overflow: hidden;
+}
+
+.form-shell::after {
+  content: "";
+  position: absolute;
+  inset: auto -60px -60px auto;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(15, 111, 255, 0.12), transparent 70%);
+  pointer-events: none;
+}
+
+.form-note {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.form-grid.two-col {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.form-grid .full-span {
+  grid-column: 1 / -1;
+}
+
+.group-list {
+  display: grid;
+  gap: 14px;
+}
+
+.group-card {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+}
+
+.group-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.group-head h3 {
+  margin-bottom: 4px;
+}
+
+.meta-line {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.94rem;
+}
+
+.chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: #eff5ff;
+  color: var(--primary-strong);
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.chip.soft {
+  background: #f3f7fb;
+  color: var(--muted);
+}
+
+.score-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 88px;
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.score-badge.pass {
+  background: #def6eb;
+  color: #0a8f5a;
+}
+
+.score-badge.fail {
+  background: #fde4e1;
+  color: #c5392f;
+}
+
+.score-badge.empty {
+  background: #eef2f8;
+  color: #5f6b7a;
+}
+
+tr.row-fail td {
+  background: #fff5f4;
+}
+
+tr.row-pass td {
+  background: #f6fffa;
 }
 
 table {
@@ -199,6 +412,16 @@ a.link:hover {
   .card {
     padding: 20px;
     border-radius: 14px;
+  }
+
+  .section-head,
+  .group-head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .form-grid.two-col {
+    grid-template-columns: 1fr;
   }
 
   h1,
